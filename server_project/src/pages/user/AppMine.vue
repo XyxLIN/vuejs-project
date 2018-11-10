@@ -11,7 +11,17 @@
     </div>
 
     <div class="username">用户名
-        <p>会员</p>
+        <p>会员
+            <el-rate
+  v-model="value5"
+  disabled
+  show-score
+  text-color="#ff9900"
+  score-template="{value}">
+</el-rate>
+
+
+        </p>
 
         </div>
     
@@ -19,7 +29,7 @@
         <transition
             enter-active-class="fadeIn"
             leave-active-class="fadeOut" >   
-             <div class="mine_sign"><br><br><p class="fa fa-pie-chart">&nbsp;任务完成进度</p></div> 
+             <div class="mine_sign animated"><br><br><p class="fa fa-pie-chart">&nbsp;任务完成进度</p></div> 
              </transition>
          <div class="mine_task"><br><br><p class="fa fa-pencil">&nbsp;每日签到</p></div>
           <div class="mine_grade"><br><br>积分</div> 
@@ -36,6 +46,14 @@ import HomeHeader from "@/components/layout/AppHeader"
 import  HomeFooter from "@/components/layout/Appfooter"
 
 export default {
+  
+      
+    data() {
+      return {
+        value5: 3.7
+      }
+    },
+  
      components:{
           HomeHeader,
           HomeFooter
@@ -44,6 +62,7 @@ export default {
 }
 </script>
 <style lang="scss">
+
     .mine-content{
         width:100%;
         /* height:37.5rem; */

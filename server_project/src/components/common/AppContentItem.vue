@@ -13,16 +13,19 @@
         <div class="grade">
             <br>
             <br>
-           <button class="btn">购票</button>
+          <router-link tag="div" :to="{ name:'book'}"> <button  class="btn">购票</button> </router-link>
         </div>
     </router-link>
 
 </template>
 
 <script>
-
+    import Book from "@/pages/details/book";
     export default {
-        props : ['info']
+        props : ['info'],
+        component:{
+            Book
+        }
     }
 
 </script>

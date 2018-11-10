@@ -3,8 +3,8 @@
     <div   class="header_content">
 		
          <div class="city" @click=" isCityShow = !isCityShow">
-			  <i class="fa fa-angle-left"></i>
-			 {{this.title}}
+			  <i @click ="back" class="fa fa-angle-left"></i>
+			  &nbsp;&nbsp; {{this.title}}
             <!-- <i  class="fa fa-cog"></i> -->
         </div> 
 		<!-- <div class="logo_title">帮  &nbsp; &nbsp; 派</div> -->
@@ -71,7 +71,23 @@
 					case 'shop':return '供应商';
 					case 'mine':return '个人中心';
 					case 'chat':return '消息';
+					case 'detail':return '详情';
+					case 'book':return '预订'
 				}
+			},
+			back(){
+            if (window.history.length <= 1) {
+                this.$router.push({path:'/'})
+                return false
+            } else {
+                this.$router.go(-1)
+            }
+            //上面都没执行就说明卡在当前页不是最后一条， histroy记录数量大于1，又没有回退记录，只能返回首页，
+         //如果上面都执行了 页面都跳走了，这个也就不用管了   
+        //     setTimeout(() => {
+        //         this.$router.push({path:'/'})      
+        //     },500)
+		// 
 			}
 		}
 	

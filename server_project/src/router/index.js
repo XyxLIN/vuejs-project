@@ -20,6 +20,8 @@ import detail from '@/pages/details/movieDetail'
 
 import login from '@/login'
 
+import Book from "@/pages/details/book";
+
 const routes = [{
     path :'/',
     redirect:{ name: 'home'}
@@ -75,6 +77,11 @@ const routes = [{
     component:AppShop,
     props:true
 },
+{
+    path:'/book',
+    name:'book',
+    component:Book
+}
 // {
 //     path:'*',
 //     redirect:{ name: 'no-found'}

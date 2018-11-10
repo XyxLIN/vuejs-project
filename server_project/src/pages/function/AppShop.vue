@@ -6,14 +6,15 @@
             <div class="shop-icon"
                 v-for = "item in types"
                 :key ="item.id"
-                @click ="type = item.type_shop"
-                :class = "{choosing:item.type_shop===type}"
+                @click ="type = item.type"
+                :class = "{choosing:item.type===type}"
             >
                 <span>{{item.title}}</span>&nbsp;
                 <i class="fa fa-sort-desc"></i>
             </div>
 
-            <waterfall :line-gap="200" :watch="infos">
+
+            <!-- <waterfall :line-gap="200" :watch="infos">
                   <waterfall-slot
                         v-for="(item, index) in infos"
                         :width="item.width"
@@ -23,11 +24,9 @@
                         >
 
                
-                    <!--
-                    your component
-                    -->
+                 
                  </waterfall-slot>
-            </waterfall>
+            </waterfall> -->
 
 
             <!-- <div class="shop-icon">
@@ -47,6 +46,10 @@
 
 
         </div>
+        
+            <app-content  ref="list" :type="type"
+
+            ></app-content>
        <home-footer>
      </home-footer>
     </div>
@@ -66,13 +69,11 @@ export default {
     data (){
         return {
             types:[
-                {id:1,title:"推荐",title:'热门推荐',type_shop:"now-playing"},
-                {id:2,title:"智能排序",title:"热门活动",type_shop:"2"},
+                {id:1,title:'热门推荐',type:"now-playing"},
+                {id:2,title:"热门活动",type:"coming-soon"},
                 {id:3,title:"筛选",type_shop:""}
             ],
-            infos:[],
             type:this.url||'now-playing',
-           
             isBackShow:false
         }
     },
@@ -84,9 +85,7 @@ export default {
         HomeFooter,
         AppContent
     },
-    async created(){
-        console.log()
-    }
+
 
     // async created (){
     //     let { url , count =5 } =this.type

@@ -7,7 +7,7 @@
                 :info = "film"
             ></app-films-item>     
         </div>  
-        
+   
     </div>
 </template>
 
@@ -24,43 +24,39 @@ export default {
             
         }
     },
-    watch: {
-        type: { // 监听类型变化，如果类型变化之后
-            immediate: true,
-            handler () {
-                this.films = [] // 清空当前的数据
-                this.hasMore = true // 重新更多
-                this.page = 1 // 重置页数
-                this.getFilms()
-                console.log( this.getFilms())
-            }
+    watch:{
+        type:{
+            immediate:true,
+             handler(){
+                this.getStoreList();
         }
+        }
+      
     },
-    methods: {
-     
-        async getFilms () { // 加载的主要逻辑
-        // 如果没有更多了，就去请求了
-            if ( !this.hasMore ) return false;
 
-            let result = await this.$http({
-                url: '/api/v4/api/film/'+this.type,
-                params: {
-                    page: this.page,
-                    count: 7
+    methods:{
+        async getStoreList(){
+              let result = await this.$http({
+                url : '/api/v4/api/film/'+this.type,
+                params:{
+                    page:this.page,
+                    count:7
                 }
             })
-
-            // 判断有没有更多数据
-            // if ( result.page.total - result.page.current <= 0 ) {
-            //     this.hasMore = false
-            // }else {
-            //     this.page ++ // 有更多的话，页数增加
-            // } 
-            // 更新数据
-            this.films = this.films.concat(result.films)
+        this.films =result.films;
+        if(result.page.total - result.page.current<=0){
+                this.hasMore=false
         }
+        else{
+            this.page++;
+        }
+
+           this.films=this.films.concat(result.films)
+            }
         
     },
+    
+    
     components: {
         AppFilmsItem
     },
