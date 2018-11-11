@@ -5,7 +5,10 @@
             <img width="100%" :src="info.cover.origin" alt="">
         </div>
         <div class="film-word1" >影片简介</div>
-      
+        <div class="detail-btn"> 
+            <button class="task-btn">接单</button>
+            <router-link tag="div" :to="{ name:'book',params:{id: info.id},query:{name:info.name}}" class="send-btn">派单</router-link>
+        </div>
         <app-footer></app-footer>
     </section>
 </template>
@@ -13,10 +16,12 @@
 <script>
 import AppHeader from '@/components/layout/AppHeader'
 import AppFooter from '@/components/layout/Appfooter'
+import book from '@/pages/details/book'
 export default {
        components:{
         AppHeader,
-        AppFooter
+        AppFooter,
+        book
     },
     props: ['id'],
     async created () {
@@ -45,6 +50,39 @@ export default {
 </script>
 
 <style lang="scss" >
+.detail-btn{
+    margin-top:7rem;
+    display: flex;
+    justify-content:space-around;
+    align-items: center; 
+    .task-btn{
+        margin:.3rem;
+        width: 3.2rem;
+        height: .8875rem;
+        line-height: .8875rem;
+        text-align: center;
+        box-sizing: border-box;
+        background-color: #f03d37;
+        color: #fff;
+        border-radius: .25rem;
+        white-space: nowrap;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .send-btn{
+        width: 3.2rem;
+        height: .8875rem;
+        line-height: .8875rem;
+        text-align: center;
+        box-sizing: border-box;
+        background-color: #3924f152;
+        color: #fff;
+        border-radius: .25rem;
+        white-space: nowrap;
+        font-size: 14px;
+        cursor: pointer;
+    }
+}
     .app-detail {
         padding-top:1.36rem;
         .img-box1 {

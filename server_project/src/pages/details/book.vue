@@ -1,9 +1,12 @@
 <template>
  <div class="book-content">
      <app-header></app-header>
-     <el-form ref="form" :model="form" label-width="80px">
+     <el-form ref="form" :model="form" label-width="80px" >
   <el-form-item label="活动名称">
-    <el-input v-model="form.name"></el-input>
+    <el-input   
+
+    >
+   </el-input>
   </el-form-item>
   <el-form-item label="活动区域">
     <el-select v-model="form.region" placeholder="请选择活动区域">
@@ -59,6 +62,17 @@ export default {
     AppHeader,
     AppFooter
   },
+
+  props: ['id'],
+  async created () {
+        let result = await this.$http({
+            url: '/api/v4/api/film/'+this.$route.params.id,
+            params: { __t: Date.now() }
+        })
+        this.films = result.film
+        console.log(result)
+        // this.info.name
+    },
   data() {
     return {
       form: {
@@ -70,7 +84,8 @@ export default {
         type: [],
         resource: "",
         desc: ""
-      }
+      },
+      films:null
     };
   },
   methods: {

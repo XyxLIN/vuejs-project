@@ -72,7 +72,7 @@
 					case 'mine':return '个人中心';
 					case 'chat':return '消息';
 					case 'detail':return '详情';
-					case 'book':return '预订'
+					case 'book':return '订单信息'
 				}
 			},
 			back(){

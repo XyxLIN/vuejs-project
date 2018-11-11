@@ -1,5 +1,5 @@
 <template>
-    <div ref = "root" class="app-films-list">
+    <div class="app-films-list">
         <div>
             <app-films-item
                 v-for = "film in films"
@@ -14,6 +14,7 @@
 <script>
 import AppFilmsItem from '@/components/common/StoreList/StoreListItem'
 import scroll from '@/util/scroll'
+// import { Toast} from 'mint-ui'
 export default {
     props: ['type'],
     data () {
@@ -44,14 +45,14 @@ export default {
                 }
             })
         this.films =result.films;
-        if(result.page.total - result.page.current<=0){
-                this.hasMore=false
-        }
-        else{
-            this.page++;
-        }
+        // if(result.page.total - result.page.current<=0){
+        //         this.hasMore=false
+        // }
+        // else{
+        //     this.page++;
+        // }
 
-           this.films=this.films.concat(result.films)
+        //    this.films=this.films.concat(result.films)
             }
         
     },

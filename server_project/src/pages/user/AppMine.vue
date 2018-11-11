@@ -27,8 +27,7 @@
     
     <div class="mine_types">
         <transition
-            enter-active-class="fadeIn"
-            leave-active-class="fadeOut" >   
+          name="fade" >   
              <div class="mine_sign animated"><br><br><p class="fa fa-pie-chart">&nbsp;任务完成进度</p></div> 
              </transition>
          <div class="mine_task"><br><br><p class="fa fa-pencil">&nbsp;每日签到</p></div>
@@ -62,6 +61,9 @@ export default {
 }
 </script>
 <style lang="scss">
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
 
     .mine-content{
         width:100%;

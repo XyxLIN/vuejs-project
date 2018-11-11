@@ -13,7 +13,7 @@
         <div class="grade">
             <br>
             <br>
-          <router-link tag="div" :to="{ name:'book'}"> <button  class="btn">购票</button> </router-link>
+          <router-link tag="div" :to="{ name:'book',params:{id:info.id},query:{name:info.name}}"> <button  class="btn">购票</button> </router-link>
         </div>
     </router-link>
 

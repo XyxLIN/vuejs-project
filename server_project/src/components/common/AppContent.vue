@@ -57,7 +57,7 @@ import  AppContentItem from "@/components/common/AppContentItem"
             })
           
                 this.infos= result.films
-            
+              
                
       
         }

@@ -110,13 +110,15 @@ export default {
 .shop-content{
     padding-top:1.4rem;
     width:100%;
+    
 }
 .shop-nav{
     display:flex;
     justify-content: space-around;
     align-items: center;
     height: 1.33333rem;
-    margin-left:.5rem;
+    /* margin-left:.5rem; */
+    border-bottom:.0325rem  solid rgb(240, 90, 21);
     /* width:100%; */
     /* margin:.2rem; */
 }
@@ -126,8 +128,10 @@ export default {
 }
 .choosing{
     color:rgb(240, 90, 21);
-    border-bottom:solid;
+    /* border-bottom:solid; */
     font-size: .4rem;
+    border:none;
+    /* margin-top:.3rem; */
 }
 
 </style>
