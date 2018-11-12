@@ -11,10 +11,12 @@
              <!-- <span class="wish">{{info.watchCount}}</span><span>人想看</span>   -->
         </div>
         <div class="grade">
-            <br>
-            <br>
+           
           <router-link tag="div" :to="{ name:'book',params:{id:info.id},query:{name:info.name}}"> <button  class="btn">购票</button> </router-link>
+           
+         <!-- <el-button style="margin-left: 15px;" type="danger" size = "mini">加入购物车</el-button> -->
         </div>
+         
     </router-link>
 
 </template>
@@ -22,10 +24,19 @@
 <script>
     import Book from "@/pages/details/book";
     export default {
+        data(){
+            return {
+                num:1
+            }
+        },
         props : ['info'],
         component:{
             Book
-        }
+        },
+        
+
+
+       
     }
 
 </script>

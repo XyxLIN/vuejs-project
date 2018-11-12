@@ -2,14 +2,14 @@
  <div class="book-content">
      <app-header></app-header>
      <el-form ref="form" :model="form" label-width="80px" >
-  <el-form-item label="活动名称">
-    <el-input   
-
+  <el-form-item style="width:8.888rem" label="活动地址">
+    <el-input   v-if= " films"
+      v-model=" films.address"
     >
    </el-input>
   </el-form-item>
-  <el-form-item label="活动区域">
-    <el-select v-model="form.region" placeholder="请选择活动区域">
+  <el-form-item v-if= " films" label="活动价格">
+    <el-select style="margin-left:-2.8rem"  v-model = "films.minimumPrice" placeholder="请选择活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
@@ -66,11 +66,11 @@ export default {
   props: ['id'],
   async created () {
         let result = await this.$http({
-            url: '/api/v4/api/film/'+this.$route.params.id,
+            url: '/api/v4/api/film/'+this.$route.params.id+"/cinema?",
             params: { __t: Date.now() }
         })
-        this.films = result.film
-        console.log(result)
+        this.films = result.cinemas[100]
+
         // this.info.name
     },
   data() {
@@ -85,7 +85,8 @@ export default {
         resource: "",
         desc: ""
       },
-      films:null
+      films:null,
+      
     };
   },
   methods: {

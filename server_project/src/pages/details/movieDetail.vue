@@ -5,9 +5,17 @@
             <img width="100%" :src="info.cover.origin" alt="">
         </div>
         <div class="film-word1" >影片简介</div>
-        <div class="detail-btn"> 
-            <button class="task-btn">接单</button>
+        <div class="detail-btn">
+
+            <div class="detail-list">
+             <el-input-number size="mini" v-model="num"  :min="1"  ></el-input-number>
+            <router-link tag="div"  :to="{ name:'book',params:{id: info.id},query:{name:info.name}}" class="task-btn">接单</router-link>
+            </div>
+
+              <div class="detail-list">
+             <el-input-number  size="mini" v-model="num1"  :min="1"  ></el-input-number> 
             <router-link tag="div" :to="{ name:'book',params:{id: info.id},query:{name:info.name}}" class="send-btn">派单</router-link>
+              </div>
         </div>
         <app-footer></app-footer>
     </section>
@@ -26,11 +34,11 @@ export default {
     props: ['id'],
     async created () {
         let result = await this.$http({
-            url: '/api/v4/api/film/'+ this.$route.params.id,
+            url: '/api/v4/api/film/'+ this.$route.params.id,   
             params: { __t: Date.now() }
         })
         this.info = result.film
-
+        console.log(this.info.cover.origin)
         // this.info.name
     },
     computed: {
@@ -40,7 +48,9 @@ export default {
     },
     data () {
         return {
-            info: null
+            info: null,
+            num:1,
+            num1:1
         }
     },
     // beforeRouteUpdate () {
@@ -51,12 +61,18 @@ export default {
 
 <style lang="scss" >
 .detail-btn{
-    margin-top:7rem;
+    margin-top:5rem;
     display: flex;
     justify-content:space-around;
     align-items: center; 
+    .detail-list{
+        width:3rem;
+        display: flex;
+        flex-direction: column;
+    }
+   
     .task-btn{
-        margin:.3rem;
+        // margin:.3rem;
         width: 3.2rem;
         height: .8875rem;
         line-height: .8875rem;
@@ -68,8 +84,10 @@ export default {
         white-space: nowrap;
         font-size: 14px;
         cursor: pointer;
+        margin-top:.5rem;
     }
     .send-btn{
+        // margin:.3rem;
         width: 3.2rem;
         height: .8875rem;
         line-height: .8875rem;
@@ -81,6 +99,7 @@ export default {
         white-space: nowrap;
         font-size: 14px;
         cursor: pointer;
+        margin-top:.5rem;
     }
 }
     .app-detail {

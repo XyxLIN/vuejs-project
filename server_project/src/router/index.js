@@ -22,9 +22,17 @@ import login from '@/login'
 
 import Book from "@/pages/details/book";
 
+import cart from '@/pages/cart/cart'
+
 const routes = [{
     path :'/',
     redirect:{ name: 'home'}
+},
+{
+    path:'/cart',
+    name:'cart',
+    component:cart
+  
 },
 {
     path:'/home',
