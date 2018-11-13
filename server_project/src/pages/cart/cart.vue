@@ -1,23 +1,51 @@
 <template>
+      
     <div class="app-car-item">
+        shoping cart
         <el-card class="box-card" shadow="hover">
-            <div class="info">
-                <img :src="info.poster.origin" alt="">
+            <div class="films">
+                <!-- <img :src="films.cover.origin" alt=""> -->
                 <div class="content">
-                    <h3>{{info.name}}</h3>
-                    <p>单价: ￥{{info.price}}</p>
+                    <h3>{{films.address}}</h3>
+                    <p>单价: ￥{{films.minimumPrice}}</p>
                 </div>
             </div>
             <div class="control">
-                <el-input-number :value="info.num"  ></el-input-number>
+                <el-input-number :value="films.num" @click = "change" ></el-input-number>
             </div>
         </el-card>
+           <div class="control">
+                <el-input-number  @click = "change" ></el-input-number>
+            </div>
     </div>
+    
 </template>
 
 <script>
 export default {
-    props: ['info']
+    data() {
+        return {
+            films:null
+        }
+    },
+  
+    methods:{
+        change(val,oldval){
+            this.$store.dispatch({
+                type:'car/controlGoodNumber',
+                id:this.films.id,
+                control_type:oldval<val
+            })
+        }
+    },
+      async created () {
+        let result = await this.$http({
+            url: '/api/v4/api/film/'+this.$route.params.id+"/cinema?",
+            params: { __t: Date.now() }
+        })
+        this.films = result.cinemas
+         console.log(this.films)
+    },
 }
 </script>
 <style lang="scss">
@@ -29,7 +57,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .info {
+        .films {
             img {
                 width: 150px;
                 height: 150px;

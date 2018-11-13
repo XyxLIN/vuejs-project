@@ -86,7 +86,7 @@ const routes = [{
     props:true
 },
 {
-    path:'/book',
+    path:'/book/:id',
     name:'book',
     component:Book
 }

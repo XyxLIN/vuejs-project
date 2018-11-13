@@ -1,3 +1,3 @@
 
 export const namespace = 'car/'
-export const UPDATE_CAR_ORDER = 'UPDATE_CAR_ORDER'
+export const UPDATE_CAR_GOODS = 'UPDATE_CAR_GOODS'

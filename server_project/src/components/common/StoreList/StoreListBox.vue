@@ -1,5 +1,5 @@
 <template>
-    <div class="app-films-list">
+    <div ref="root" class="app-films-list">
         <div>
             <app-films-item
                 v-for = "film in films"
@@ -13,7 +13,7 @@
 
 <script>
 import AppFilmsItem from '@/components/common/StoreList/StoreListItem'
-import scroll from '@/util/scroll'
+import Bscroll from '@/util/scroll'
 // import { Toast} from 'mint-ui'
 export default {
     props: ['type'],
@@ -27,24 +27,39 @@ export default {
     },
     watch:{
         type:{
-            immediate:true,
-             handler(){
-                this.getStoreList();
+            immediate : true,
+            handler(){
+                this.films=[]
+                this.page=1
+                this.getStoreList()
+            }
         }
-        }
-      
-    },
 
+    },
+   
+    // mounted(){
+    //     this.scroll = scroll({
+    //          el: this.$refs.root,
+    //         onscroll:(y)=>{
+    //             if(y>200){
+    //                 this.getStoreList.bind(this)
+    //             }
+    //         }
+    //     })
+    // },
     methods:{
         async getStoreList(){
               let result = await this.$http({
                 url : '/api/v4/api/film/'+this.type,
                 params:{
                     page:this.page,
-                    count:7
+                    count:20
                 }
             })
         this.films =result.films;
+        //  this.$nextTick(() => {
+        //   this.scroll = new Bscroll(this.$refs.root, {})
+        // })
         // if(result.page.total - result.page.current<=0){
         //         this.hasMore=false
         // }
@@ -53,8 +68,8 @@ export default {
         // }
 
         //    this.films=this.films.concat(result.films)
-            }
-        
+            },
+         
     },
     
     

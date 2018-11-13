@@ -3,7 +3,7 @@
         <div class="fa fa-grav"></div>
         <p class="font-login"> xxxxx会员登录</p>
         <!-- @submit.prevent = "login" -->
-       <form @submit="handler" >
+       <form @submit.prevent >
            <div class="form-group" >
               <input type="text" v-model = "phone" class="form-control" placeholder="输入您的手机号">
                <!-- <span class="sms-code" v-if = "isCodeShow" @click = "sendCode">
@@ -16,12 +16,13 @@
                 <input v-model = "code" type="password" class="form-control" placeholder="请输入您的密码" >
                 <div class="input-bg" ></div>
             </div>
-            <button type="submit" class="center-block submit" >登录</button>
+            <button type="text" class="center-block submit" @click ="handler">登录</button>
         </form>
     </section>
 </template>
 
 <script>
+import {Toast} from 'mint-ui'
 export default {
     data () {
         return { 
@@ -86,14 +87,21 @@ export default {
     // },
     methods: {
         
-            handler (val) {
+            handler (val,e) {
                 let result = /^1[34578]\d{9}$/.test(this.phone.trim()) 
                 this.isCodeShow =result
                 if(result && (this.code!='')){
-                    console.log(111)
-                     this.$router.replace({name: 'mine'})
-                
-               
+                     this.$router.replace({name: 'mine'})      
+                     return true
+            }
+            else {
+              // alert(111)
+              Toast({
+                    message: '手机号码或密码错误',
+                    position: 'bottom',
+                    duration: 3000
+                  });
+                  return false
             }
         }
     }

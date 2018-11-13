@@ -33,9 +33,6 @@
         component:{
             Book
         },
-        
-
-
        
     }
 

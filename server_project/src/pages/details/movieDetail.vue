@@ -5,19 +5,41 @@
             <img width="100%" :src="info.cover.origin" alt="">
         </div>
         <div class="film-word1" >影片简介</div>
+        <div class="film-word2" >
+            <span >导&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;演：</span>
+            <span >{{info.director}}</span>
+        </div>
+        <div class="film-word2" >
+            <span >主&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;演：</span>
+            <span>{{actors}}</span>
+        </div>
+        <div class="film-word2" >
+            <span >地区语言：</span>
+            <span >{{info.nation}}({{info.language}})</span>
+        </div>
+        <div class="film-word2" >
+            <span >类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</span>
+            <span>{{info.category}}</span>
+        </div>
+        <div class="film-word2" >
+            <span >地区语言：</span>
+            <span >{{info.premiereAt | premiere}})</span>
+        </div>
+        <div class="film-word3" >{{info.synopsis}}</div>
+
         <div class="detail-btn">
 
             <div class="detail-list">
-             <el-input-number size="mini" v-model="num"  :min="1"  ></el-input-number>
+            <el-input-number size="mini" v-model="num1"  :min="1"  ></el-input-number>
             <router-link tag="div"  :to="{ name:'book',params:{id: info.id},query:{name:info.name}}" class="task-btn">接单</router-link>
             </div>
 
               <div class="detail-list">
-             <el-input-number  size="mini" v-model="num1"  :min="1"  ></el-input-number> 
+             <el-input-number  size="mini" v-model="num"  :min="1"  ></el-input-number> 
             <router-link tag="div" :to="{ name:'book',params:{id: info.id},query:{name:info.name}}" class="send-btn">派单</router-link>
               </div>
         </div>
-        <app-footer></app-footer>
+        
     </section>
 </template>
 
@@ -38,9 +60,11 @@ export default {
             params: { __t: Date.now() }
         })
         this.info = result.film
-        console.log(this.info.cover.origin)
+        // console.log(this.info.cover.origin)
         // this.info.name
+        
     },
+    
     computed: {
         actors () {
             return this.info.actors.map(actor => actor.name).join(' | ')
@@ -61,7 +85,7 @@ export default {
 
 <style lang="scss" >
 .detail-btn{
-    margin-top:5rem;
+    margin-top:-2rem;
     display: flex;
     justify-content:space-around;
     align-items: center; 
@@ -70,6 +94,7 @@ export default {
         display: flex;
         flex-direction: column;
     }
+ 
    
     .task-btn{
         // margin:.3rem;
@@ -133,5 +158,13 @@ export default {
         }
 
     }
+     .film-word1 {
+           
+        }
+        .film-word2 {
+              
+        }
+        .film-word3 {
+        }
 </style>
 
