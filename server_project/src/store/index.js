@@ -5,12 +5,16 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import car from './car'
+
+import city from './city'
+
+import { saveCityInStorage} from './plugins'
 
 const store = new Vuex.Store({
     modules:{
-        car
-    }
+        city
+    },
+    plugins:[ saveCityInStorage ]
 })
 
 export default store

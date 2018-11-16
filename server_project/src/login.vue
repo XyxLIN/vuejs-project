@@ -27,7 +27,7 @@ export default {
     data () {
         return { 
             isCodeShow: false,
-            phone: '',
+            phone: '15697467753',
             isResend: false,
             resendTime: 60,
             code: ''
@@ -86,13 +86,17 @@ export default {
     //     // }
     // },
     methods: {
+
         
             handler (val,e) {
                 let result = /^1[34578]\d{9}$/.test(this.phone.trim()) 
-                this.isCodeShow =result
+                // this.isCodeShow =result
+                localStorage.setItem('phone',this.phone)
+                localStorage.setItem('code',this.code)
                 if(result && (this.code!='')){
                      this.$router.replace({name: 'mine'})      
                      return true
+                   
             }
             else {
               // alert(111)

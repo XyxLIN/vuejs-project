@@ -14,7 +14,7 @@
 <script>
 import AppFilmsItem from '@/components/common/StoreList/StoreListItem'
 import Bscroll from '@/util/scroll'
-// import { Toast} from 'mint-ui'
+import { Toast } from 'mint-ui'
 export default {
     props: ['type'],
     data () {

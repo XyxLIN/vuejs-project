@@ -12,6 +12,8 @@ import '@/util/filters'
 
 import '@/util/filter_img'
 
+import VueProgressBar from 'vue-progressbar'
+
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 // import App from './App.vue';
@@ -40,4 +42,41 @@ Vue.use(ElementUI);
 // 将VueAwemeSwiper中的多个组件注册为全局组件
 Vue.use(VueAwesomeSwiper)
 
+const cities=(city)=>{
+    let arr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+    let obj ={}
+    arr.forEach(item => obj[item] = [])
+    city.forEach(item =>{
+        let word = item.pinyin.substr(0,1)
+        obj[word].push(item)
+    })
+    for(const key in obj){
+        if(!obj[key].length){
+            delete obj[key]
+        }
+    }
+
+    return obj
+
+}
+
+const util ={
+    cities
+}
+
+const options={
+    color: 'rgb(240, 90, 21)',
+    failedColor: 'rgb(240, 90, 21)',
+    thickness: '5px',
+    transition: {
+        speed: '0.2s',
+        opacity: '0.6s',
+        termination: 300
+    },
+    autoRevert: true,
+    location: 'top',
+    inverse: false
+}
+Vue.use(VueProgressBar,options)
 Vue.prototype.$http = ajax
+Vue.prototype.$util= util

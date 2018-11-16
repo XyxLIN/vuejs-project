@@ -22,8 +22,27 @@ export default {
   components:{
    
   
-  }
+  },
+  created() {
+    this.$router.beforeEach((to , from , next )=>{
+      if(to.name !=='mine'){
+        this.$Progress.start()
+       console.log('beforeEach')
+      }
+      next()
+    })
+    this.$router.afterEach((to , from , next) =>{
+      if(to.name !=='mine'){
+        this.$Progress.finish()
+        console.log('afterEach')
+      }
+    })
+},
+
+
+
 }
+
 
 </script>
 <style lang="scss">

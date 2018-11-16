@@ -24,12 +24,14 @@ import Book from "@/pages/details/book";
 
 import cart from '@/pages/cart/cart'
 
+import city from '@/pages/city/AppCity'
+
 const routes = [{
     path :'/',
     redirect:{ name: 'home'}
 },
 {
-    path:'/cart',
+    path:'/cart/:id',
     name:'cart',
     component:cart
   
@@ -45,11 +47,21 @@ const routes = [{
     component:login
   
 },
+{
+    path:'/city',
+    name:'city',
+    component:city
+  
+},
 
 {
     path:'/chat',
     name:'chat',
-    component:AppMessage
+    component:AppMessage,
+    beforeEnter: (to,from ,next) =>{
+        let result = localStorage.getItem('phone')
+        next(result ? true:{name:'login'})
+    }
 },
 {
     path:'/detail/:id',
@@ -70,14 +82,10 @@ const routes = [{
     path:'/mine',
     name:'mine',
     component:mine,
-    // children:[
-    //     {
-    //         path:'/login',
-    //         name:'login',
-    //         component:login
-            
-    //     }
-    // ]
+    beforeEnter: (to,from ,next) =>{
+        let result = JSON.parse(localStorage.getItem('phone') )
+        next(result ? true:{name:'login'})
+    }
 },
 {
     path:'/shop',

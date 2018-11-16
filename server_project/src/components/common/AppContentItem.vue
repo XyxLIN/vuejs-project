@@ -12,11 +12,11 @@
         </div>
         <div class="grade">
            
-          <router-link tag="div" :to="{ name:'book',params:{id:info.id},query:{name:info.name}}"> <button  class="btn">购票</button> </router-link>
+          <router-link tag="div" :to="{ name:'cart',params:{id:info.id},query:{name:info.name}}"> <button  class="btn">购买</button> </router-link>
            
          <!-- <el-button style="margin-left: 15px;" type="danger" size = "mini">加入购物车</el-button> -->
         </div>
-         
+        
     </router-link>
 
 </template>

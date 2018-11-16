@@ -14,6 +14,15 @@ module.exports ={
                 changeOrigin:true,
                 pathRewrite:{
                     '^/api':''
+                },
+              
+            },
+
+            '/bd':{
+                target:'http://api.map.baidu.com/',
+                changeOrigin:true,
+                pathRewrite:{
+                    '^/bd':''
                 }
             }
         }

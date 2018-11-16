@@ -8,37 +8,26 @@
             <!-- <i  class="fa fa-cog"></i> -->
         </div> 
 		<!-- <div class="logo_title">帮  &nbsp; &nbsp; 派</div> -->
-		<div class="fa fa-search" style="margin-right:.5rem;"></div>
+		<div>
+			<router-link tag="span" :to="{name:'city'}">{{city.city ? city.city.cityName:''}} &nbsp;</router-link>
+		<div class="fa fa-cloud" style="margin-right:.5rem; color:#fff"></div>
+	
+		</div>
 		<!-- <span>扫一扫</span> -->
     </div>
 
-    <div v-if="isCityShow" class="provinceCityAll" style=" margin-top:.5rem;  top: 40px; display: block;">
-        <div class="tabs clearfix">
-            <ul>
-                <li>
-                    <a tb="provinceAll" id="provinceAll" class="current">省份</a>
-                    </li>
-                    <li>
-                        <a tb="cityAll" id="cityAll">城市</a>
-                        </li>
-                        <li>
-                            <a tb="countyAll" id="countyAll">区/县</a>
-                            </li>
-                            </ul>
-                            </div>                            <div class="con">
-                                <div class="provinceAll">
-                                    <div class="pre">
-                                        <a></a>
-                                        </div>
-                                        <div class="list">
-                                            <ul>
-                                                <li>
-                                                    <a onclick="viewCity()" id="beijin" title="北京">北京</a></li><li><a onclick="viewCity('shanghai');" id="shanghai" title="上海">上海</a></li><li><a onclick="viewCity('tianjin');" id="tianjin" title="天津">天津</a></li><li><a onclick="viewCity('chongqing');" id="chongqing" title="重庆">重庆</a></li><li><a onclick="viewCity('anhui');" id="anhui" title="安徽省">安徽</a></li><li><a onclick="viewCity('aomen');" id="aomen" title="澳门特别行政区">澳门</a></li><li><a onclick="viewCity('fujian');" id="fujian" title="福建省">福建</a></li><li><a onclick="viewCity('gansu');" id="gansu" title="甘肃省">甘肃</a></li><li><a onclick="viewCity('guangdong');" id="guangdong" title="广东省">广东</a></li><li><a onclick="viewCity('guangxi');" id="guangxi" title="广西壮族自治区">广西</a></li><li><a onclick="viewCity('guizhou');" id="guizhou" title="贵州省">贵州</a></li><li><a onclick="viewCity('hainan');" id="hainan" title="海南省">海南</a></li></ul></div><div class="next"><a class="can" onclick="provincePage(2);"></a></div></div><div class="cityAll" style="display: none;"><div class="pre"><a></a></div><div class="list"><ul></ul></div><div class="next"><a></a></div></div><div class="countyAll" style="display: none;"><div class="pre"><a></a></div><div class="list"><ul></ul></div><div class="next"><a></a></div></div></div></div>
+  
     </section>
 
 </template>
 
 <script>
+import { mapState} from 'vuex'
+
+import { CHANGE_CITY } from '@/store/city/mutation-types'
+
+import { mapMutations} from 'vuex'
+
     export default {
         data() {
             return {
@@ -46,6 +35,20 @@
 				title:'首页'
             }
 		},
+		computed: mapState(['city']),
+		
+		beforeCreate () {
+			if( localStorage.city) {			
+				this.$store.commit({
+					type:'city/'+CHANGE_CITY,
+					cities:JSON.parse(localStorage.cities),
+					city:JSON.parse(localStorage.city)
+				})
+			} else {
+				
+				this.$store.dispatch({type:'city/getCurrentPosition'})
+			}
+		}, 
 		// methods:{
 		// 	fn :function(){
 		// 		this.$router.$emit('title',this.title)
@@ -63,6 +66,9 @@
 			})
 		},
 		methods:{
+		// 	...mapMutations({
+		// 		city:'CHANGE_city',
+		// }),
 			createTitle (to) {
                 // console.log(to)
 				let _to = to || this.$route
@@ -71,9 +77,10 @@
 					case 'shop':return '供应商';
 					case 'mine':return '个人中心';
 					case 'chat':return '消息';
-					case 'detail':return '详情';
+					case 'detail':return _to.query.name;
 					case 'book':return '订单信息';
-					case 'cart' : return '购物车'
+					case 'cart' : return '购物车';
+					case 'city' : return '城市选择';
 				}
 			},
 			back(){
@@ -90,7 +97,8 @@
         //     },500)
 		// 
 			}
-		}
+		},
+
 	
     }
 </script>
